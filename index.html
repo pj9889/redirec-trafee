@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    
-    <!-- ফেভিকন (Favicon) এখানে locantof1.webp সেট করা হলো -->
     <link rel="icon" type="image/webp" href="locantof1.webp">
-
     <style>
-        /* বেসিক রিসেট এবং ফুল-স্ক্রিন সেটআপ */
         * {
             margin: 0;
             padding: 0;
@@ -22,8 +18,6 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #000;
         }
-
-        /* ১ সেকেন্ড পর পর ব্যাকগ্রাউন্ড ছবি চেঞ্জ হওয়ার স্লাইডার */
         .bg-slider {
             position: absolute;
             top: 0;
@@ -44,8 +38,6 @@
         .bg-slide.active {
             opacity: 1;
         }
-
-        /* ওভারলে - লেখা ও লোগো পরিষ্কার দেখানোর জন্য */
         .overlay {
             position: absolute;
             top: 0;
@@ -55,8 +47,6 @@
             background: rgba(0, 0, 0, 0.45);
             z-index: 2;
         }
-
-        /* মেইন কন্টেইনার */
         .content-container {
             position: absolute;
             top: 0;
@@ -70,8 +60,6 @@
             align-items: center;
             text-align: center;
         }
-
-        /* মাঝ বরাবর বাম থেকে ডান পর্যন্ত লোগো */
         .logo-container {
             width: 100%;
             max-width: 600px;
@@ -84,8 +72,6 @@
             display: block;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
         }
-
-        /* টেক্সট অ্যানিমেশন ও স্টাইল */
         .text-line {
             font-weight: 900;
             text-transform: uppercase;
@@ -94,8 +80,6 @@
             margin: 8px 0;
             opacity: 0;
         }
-
-        /* ১ম লেখা: Many Holes */
         .text-many-holes {
             font-size: clamp(3.5rem, 8vw, 6rem);
             color: #fff;
@@ -104,8 +88,6 @@
         .slide-from-left {
             animation: slideLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-
-        /* ২য় লেখা: Waiting For You */
         .text-waiting {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             color: #00ffff;
@@ -114,8 +96,6 @@
         .slide-from-right {
             animation: slideRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-
-        /* ৩য় লেখা: Free */
         .text-free {
             font-size: clamp(4rem, 10vw, 8rem);
             color: #39ff14;
@@ -127,8 +107,6 @@
                        megaShake 0.15s infinite alternate linear;
             animation-delay: 0s, 0.4s;
         }
-
-        /* সাদা-লাল মিক্সড ফেক বাফারিং (Medium Size Spinner) */
         .fake-buffer {
             width: 60px;
             height: 60px;
@@ -139,29 +117,22 @@
             opacity: 0;
             filter: drop-shadow(0 0 10px #ff0000);
         }
-        
-        /* বাফারিং এক্টিভ করার ক্লাস */
         .buffer-active {
             opacity: 1;
             animation: spin 0.8s linear infinite;
         }
-
-        /* কি-ফ্রেম অ্যানিমেশনসমূহ */
         @keyframes slideLeft {
             0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
             100% { transform: translateX(0) skewX(0deg); opacity: 1; }
         }
-
         @keyframes slideRight {
             0% { transform: translateX(150%) skewX(20deg); opacity: 0; }
             100% { transform: translateX(0) skewX(0deg); opacity: 1; }
         }
-
         @keyframes slideBottom {
             0% { transform: translateY(150%) scale(0.5); opacity: 0; }
             100% { transform: translateY(0) scale(1); opacity: 1; }
         }
-
         @keyframes megaShake {
             0% { transform: translate(2px, 1px) rotate(0deg) scale(1); }
             20% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.05); }
@@ -170,7 +141,6 @@
             80% { transform: translate(1px, -1px) rotate(-1deg) scale(1); }
             100% { transform: translate(-1px, 2px) rotate(1deg) scale(1.08); }
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -179,7 +149,6 @@
 </head>
 <body>
 
-    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার -->
     <div class="bg-slider">
         <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
         <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
@@ -191,25 +160,20 @@
     <div class="overlay"></div>
 
     <div class="content-container">
-        <!-- লোগো -->
         <div class="logo-container">
-            <img src="1x.webp" alt="Logo">
+            <img src="lgd1.png" alt="Logo">
         </div>
 
-        <!-- টেক্সটসমূহ -->
         <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
         <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
         <div id="text3" class="text-line text-free">Free</div>
         
-        <!-- ফেক বাফারিং স্পিনার -->
         <div id="loader" class="fake-buffer"></div>
     </div>
 
     <script>
-        // আপনার অ্যাফিলিয়েট লিংকটি এখানে দিন
         const affiliateLink = "https://your-affiliate-link-here.com";
 
-        // ব্যাকগ্রাউন্ড ইমেজ স্লাইডার কন্ট্রোল
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
 
@@ -219,30 +183,23 @@
             slides[currentSlide].classList.add('active');
         }, 1000);
 
-        // পেজ লোড হওয়ার পর অ্যাকশন শুরু
         window.addEventListener('load', () => {
             const t1 = document.getElementById('text1');
             const t2 = document.getElementById('text2');
             const t3 = document.getElementById('text3');
             const loader = document.getElementById('loader');
 
-            // ১. "Many Holes" বাম থেকে আসবে
             t1.classList.add('slide-from-left');
 
-            // ২. ৩০০ মি.সে. পর "Waiting For You" ডান থেকে আসবে
             setTimeout(() => {
                 t2.classList.add('slide-from-right');
             }, 300);
 
-            // ৩. ৬০০ মি.সে. পর "Free" নিচ থেকে আসবে এবং কাঁপতে থাকবে
             setTimeout(() => {
                 t3.classList.add('slide-from-bottom');
-                
-                // বাফারিং শুরু
                 loader.classList.add('buffer-active');
             }, 600);
 
-            // ৪. বাফারিং শুরু হওয়ার ২ সেকেন্ড পর রিডাইরেক্ট হবে
             setTimeout(() => {
                 window.location.href = affiliateLink;
             }, 2600);
