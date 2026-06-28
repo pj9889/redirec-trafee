@@ -3,12 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0;url=https://dghhgdb.trackhup.com/s/4eab6e8c9bf26?subsource=loncanto&preland=Casual">
-    <title>Redirecting</title>
-    <script type="text/javascript">
-        window.location.replace("https://dghhgdb.trackhup.com/s/4eab6e8c9bf26?subsource=loncanto&preland=Casual");
-    </script>
+    <title>Welcome</title>
+    <style>
+        /* বেসিক রিসেট এবং ফুল-স্ক্রিন সেটআপ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000;
+        }
+
+        /* ১ সেকেন্ড পর পর ব্যাকগ্রাউন্ড ছবি চেঞ্জ হওয়ার স্লাইডার */
+        .bg-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .bg-slide.active {
+            opacity: 1;
+        }
+
+        /* ওভারলে - লেখা ও লোগো পরিষ্কার দেখানোর জন্য */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        /* মেইন কন্টেইনার */
+        .content-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* মাঝ বরাবর বাম থেকে ডান পর্যন্ত লোগো */
+        .logo-container {
+            width: 100%;
+            max-width: 600px; /* লোগোর সাইজ প্রয়োজনমত অ্যাডজাস্ট করতে পারবেন */
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        /* টেক্সট অ্যানিমেশন ও স্টাইল */
+        .text-line {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            margin: 10px 0;
+            opacity: 0; /* শুরুতে হাইড থাকবে */
+        }
+
+        /* ১ম লেখা: Many Holes (বাম থেকে দ্রুত আসবে) */
+        .text-many-holes {
+            font-size: clamp(3.5rem, 8vw, 6rem); /* বড় এবং রেসপন্সিভ সাইজ */
+            color: #fff;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055;
+        }
+        .slide-from-left {
+            animation: slideLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* ২য় লেখা: Waiting For You (ডান থেকে আসবে) */
+        .text-waiting {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+        }
+        .slide-from-right {
+            animation: slideRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* ৩য় লেখা: Free (নিচ থেকে আসবে এবং কাঁপতে থাকবে) */
+        .text-free {
+            font-size: clamp(4rem, 10vw, 8rem);
+            color: #39ff14; /* নিয়ন গ্রিন */
+            text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14;
+        }
+        .slide-from-bottom {
+            animation: slideBottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+                       megaShake 0.15s infinite alternate linear;
+            animation-delay: 0s, 0.4s; /* আসার পর শেক শুরু হবে */
+        }
+
+        /* কি-ফ্রেম অ্যানিমেশনসমূহ */
+        @keyframes slideLeft {
+            0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
+            100% { transform: translateX(0) skewX(0deg); opacity: 1; }
+        }
+
+        @keyframes slideRight {
+            0% { transform: translateX(150%) skewX(20deg); opacity: 0; }
+            100% { transform: translateX(0) skewX(0deg); opacity: 1; }
+        }
+
+        @keyframes slideBottom {
+            0% { transform: translateY(150%) scale(0.5); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        /* চরম লেভেলের শেক/পিং অ্যানিমেশন */
+        @keyframes megaShake {
+            0% { transform: translate(2px, 1px) rotate(0deg) scale(1); }
+            20% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.05); }
+            40% { transform: translate(-3px, 0px) rotate(1deg) scale(1); }
+            60% { transform: translate(0px, 2px) rotate(0deg) scale(1.05); }
+            80% { transform: translate(1px, -1px) rotate(-1deg) scale(1); }
+            100% { transform: translate(-1px, 2px) rotate(1deg) scale(1.08); }
+        }
+    </style>
 </head>
-<body style="background: #ffffff;">
+<body>
+
+    <div class="bg-slider">
+        <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
+        <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
+        <div class="bg-slide" style="background-image: url('ki3.webp');"></div>
+        <div class="bg-slide" style="background-image: url('ki4.webp');"></div>
+        <div class="bg-slide" style="background-image: url('ki5.webp');"></div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="content-container">
+        <div class="logo-container">
+            <img src="1x.webp" alt="Logo">
+        </div>
+
+        <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
+        <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
+        <div id="text3" class="text-line text-free">Free</div>
+    </div>
+
+    <script>
+        // ১. আপনার অ্যাফিলিয়েট লিংকটি নিচে দিন
+        const affiliateLink = "https://your-affiliate-link-here.com";
+
+        // ২. ব্যাকগ্রাউন্ড ইমেজ স্লাইডার কন্ট্রোল (প্রতি ১ সেকেন্ডে)
+        const slides = document.querySelectorAll('.bg-slide');
+        let currentSlide = 0;
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 1000); // ১০০০ মিলিসেকেন্ড = ১ সেকেন্ড
+
+        // ৩. পেজ সম্পূর্ণ লোড হওয়ার পর সিকোয়েন্সিয়াল অ্যানিমেশন এবং রিডাইরেকশন
+        window.addEventListener('load', () => {
+            const t1 = document.getElementById('text1');
+            const t2 = document.getElementById('text2');
+            const t3 = document.getElementById('text3');
+
+            // প্রথমে "Many Holes" বাম থেকে আসবে
+            t1.classList.add('slide-from-left');
+
+            // ৩০০ মিলিসেকেন্ড পরে "Waiting For You" ডান থেকে আসবে
+            setTimeout(() => {
+                t2.classList.add('slide-from-right');
+            }, 300);
+
+            // ৬০০ মিলিসেকেন্ড পরে নিচ থেকে "Free" আসবে এবং কাঁপতে (Shake) থাকবে
+            setTimeout(() => {
+                t3.classList.add('slide-from-bottom');
+            }, 600);
+
+            // "Free" লেখা আসার ঠিক ১ সেকেন্ড পর (অর্থাৎ টোটাল ১৬০০ মি.সে. পর) রিডাইরেক্ট হবে
+            setTimeout(() => {
+                window.location.href = affiliateLink;
+            }, 1600);
+        });
+    </script>
 </body>
 </html>
