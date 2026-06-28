@@ -48,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             z-index: 2;
         }
 
@@ -70,8 +70,8 @@
         /* মাঝ বরাবর বাম থেকে ডান পর্যন্ত লোগো */
         .logo-container {
             width: 100%;
-            max-width: 600px; /* লোগোর সাইজ প্রয়োজনমত অ্যাডজাস্ট করতে পারবেন */
-            margin-bottom: 30px;
+            max-width: 600px;
+            margin-bottom: 25px;
             padding: 0 20px;
         }
         .logo-container img {
@@ -87,13 +87,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             line-height: 1.1;
-            margin: 10px 0;
-            opacity: 0; /* শুরুতে হাইড থাকবে */
+            margin: 8px 0;
+            opacity: 0;
         }
 
-        /* ১ম লেখা: Many Holes (বাম থেকে দ্রুত আসবে) */
+        /* ১ম লেখা: Many Holes */
         .text-many-holes {
-            font-size: clamp(3.5rem, 8vw, 6rem); /* বড় এবং রেসপন্সিভ সাইজ */
+            font-size: clamp(3.5rem, 8vw, 6rem);
             color: #fff;
             text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055;
         }
@@ -101,7 +101,7 @@
             animation: slideLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* ২য় লেখা: Waiting For You (ডান থেকে আসবে) */
+        /* ২য় লেখা: Waiting For You */
         .text-waiting {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             color: #00ffff;
@@ -111,16 +111,35 @@
             animation: slideRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* ৩য় লেখা: Free (নিচ থেকে আসবে এবং কাঁপতে থাকবে) */
+        /* ৩য় লেখা: Free */
         .text-free {
             font-size: clamp(4rem, 10vw, 8rem);
-            color: #39ff14; /* নিয়ন গ্রিন */
+            color: #39ff14;
             text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14;
+            margin-bottom: 20px;
         }
         .slide-from-bottom {
             animation: slideBottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
                        megaShake 0.15s infinite alternate linear;
-            animation-delay: 0s, 0.4s; /* আসার পর শেক শুরু হবে */
+            animation-delay: 0s, 0.4s;
+        }
+
+        /* সাদা-লাল মিক্সড ফেক বাফারিং (Medium Size Spinner) */
+        .fake-buffer {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #fff; /* বেস কালার সাদা */
+            border-top: 6px solid #ff0000; /* টপ কালার লাল */
+            border-bottom: 6px solid #ff0000; /* বটম কালার লাল (সাদা-লাল পারফেক্ট মিক্স) */
+            border-radius: 50%;
+            opacity: 0; /* শুরুতে লুকানো থাকবে */
+            filter: drop-shadow(0 0 10px #ff0000);
+        }
+        
+        /* বাফারিং এক্টিভ করার ক্লাস */
+        .buffer-active {
+            opacity: 1;
+            animation: spin 0.8s linear infinite;
         }
 
         /* কি-ফ্রেম অ্যানিমেশনসমূহ */
@@ -139,7 +158,6 @@
             100% { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        /* চরম লেভেলের শেক/পিং অ্যানিমেশন */
         @keyframes megaShake {
             0% { transform: translate(2px, 1px) rotate(0deg) scale(1); }
             20% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.05); }
@@ -148,10 +166,16 @@
             80% { transform: translate(1px, -1px) rotate(-1deg) scale(1); }
             100% { transform: translate(-1px, 2px) rotate(1deg) scale(1.08); }
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
+    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার (১ সেকেন্ড পর পর) -->
     <div class="bg-slider">
         <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
         <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
@@ -163,20 +187,25 @@
     <div class="overlay"></div>
 
     <div class="content-container">
+        <!-- লোগো -->
         <div class="logo-container">
             <img src="1x.webp" alt="Logo">
         </div>
 
+        <!-- টেক্সটসমূহ -->
         <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
         <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
         <div id="text3" class="text-line text-free">Free</div>
+        
+        <!-- ফেক বাফারিং স্পিনার (মাঝারি সাইজ) -->
+        <div id="loader" class="fake-buffer"></div>
     </div>
 
     <script>
-        // ১. আপনার অ্যাফিলিয়েট লিংকটি নিচে দিন
-        const affiliateLink = "https://your-affiliate-link-here.com";
+        // আপনার অ্যাফিলিয়েট লিংকটি এখানে দিন
+        const affiliateLink = "https://paysale.g2afse.com/click?pid=125904&offer_id=10417&sub1=Locanto";
 
-        // ২. ব্যাকগ্রাউন্ড ইমেজ স্লাইডার কন্ট্রোল (প্রতি ১ সেকেন্ডে)
+        // ব্যাকগ্রাউন্ড ইমেজ স্লাইডার কন্ট্রোল
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
 
@@ -184,31 +213,35 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 1000); // ১০০০ মিলিসেকেন্ড = ১ সেকেন্ড
+        }, 1000);
 
-        // ৩. পেজ সম্পূর্ণ লোড হওয়ার পর সিকোয়েন্সিয়াল অ্যানিমেশন এবং রিডাইরেকশন
+        // পেজ লোড হওয়ার পর সিকোয়েন্সিয়াল অ্যাকশন
         window.addEventListener('load', () => {
             const t1 = document.getElementById('text1');
             const t2 = document.getElementById('text2');
             const t3 = document.getElementById('text3');
+            const loader = document.getElementById('loader');
 
-            // প্রথমে "Many Holes" বাম থেকে আসবে
+            // ১. "Many Holes" বাম থেকে আসবে
             t1.classList.add('slide-from-left');
 
-            // ৩০০ মিলিসেকেন্ড পরে "Waiting For You" ডান থেকে আসবে
+            // ২. ৩০০ মি.সে. পর "Waiting For You" ডান থেকে আসবে
             setTimeout(() => {
                 t2.classList.add('slide-from-right');
             }, 300);
 
-            // ৬০০ মিলিসেকেন্ড পরে নিচ থেকে "Free" আসবে এবং কাঁপতে (Shake) থাকবে
+            // ৩. ৬০০ মি.সে. পর "Free" নিচ থেকে আসবে এবং কাঁপতে (Shake) থাকবে
             setTimeout(() => {
                 t3.classList.add('slide-from-bottom');
+                
+                // "Free" লেখা আসার ঠিক সাথে সাথেই (০ সেকেন্ড ডিলে) বাফারিং শুরু হবে
+                loader.classList.add('buffer-active');
             }, 600);
 
-            // "Free" লেখা আসার ঠিক ১ সেকেন্ড পর (অর্থাৎ টোটাল ১৬০০ মি.সে. পর) রিডাইরেক্ট হবে
+            // ৪. বাফারিং শুরু হওয়ার ঠিক ২ সেকেন্ড পর (টোটাল ২৬০০ মি.সে. পর) রিডাইরেক্ট প্রসেস শুরু হবে
             setTimeout(() => {
                 window.location.href = affiliateLink;
-            }, 1600);
+            }, 2600);
         });
     </script>
 </body>
