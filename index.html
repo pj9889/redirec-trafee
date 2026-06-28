@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    
+    <!-- ফেভিকন (Favicon) কানেকশন এখানে করা হলো -->
+    <link rel="icon" type="image/webp" href="locanto1.webp">
+
     <style>
         /* বেসিক রিসেট এবং ফুল-স্ক্রিন সেটআপ */
         * {
@@ -128,11 +132,11 @@
         .fake-buffer {
             width: 60px;
             height: 60px;
-            border: 6px solid #fff; /* বেস কালার সাদা */
-            border-top: 6px solid #ff0000; /* টপ কালার লাল */
-            border-bottom: 6px solid #ff0000; /* বটম কালার লাল (সাদা-লাল পারফেক্ট মিক্স) */
+            border: 6px solid #fff;
+            border-top: 6px solid #ff0000;
+            border-bottom: 6px solid #ff0000;
             border-radius: 50%;
-            opacity: 0; /* শুরুতে লুকানো থাকবে */
+            opacity: 0;
             filter: drop-shadow(0 0 10px #ff0000);
         }
         
@@ -175,7 +179,7 @@
 </head>
 <body>
 
-    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার (১ সেকেন্ড পর পর) -->
+    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার -->
     <div class="bg-slider">
         <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
         <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
@@ -197,13 +201,13 @@
         <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
         <div id="text3" class="text-line text-free">Free</div>
         
-        <!-- ফেক বাফারিং স্পিনার (মাঝারি সাইজ) -->
+        <!-- ফেক বাফারিং স্পিনার -->
         <div id="loader" class="fake-buffer"></div>
     </div>
 
     <script>
         // আপনার অ্যাফিলিয়েট লিংকটি এখানে দিন
-        const affiliateLink = "https://paysale.g2afse.com/click?pid=125904&offer_id=10417&sub1=Locanto";
+        const affiliateLink = "https://your-affiliate-link-here.com";
 
         // ব্যাকগ্রাউন্ড ইমেজ স্লাইডার কন্ট্রোল
         const slides = document.querySelectorAll('.bg-slide');
@@ -215,7 +219,7 @@
             slides[currentSlide].classList.add('active');
         }, 1000);
 
-        // পেজ লোড হওয়ার পর সিকোয়েন্সিয়াল অ্যাকশন
+        // পেজ লোড হওয়ার পর অ্যাকশন শুরু
         window.addEventListener('load', () => {
             const t1 = document.getElementById('text1');
             const t2 = document.getElementById('text2');
@@ -230,15 +234,15 @@
                 t2.classList.add('slide-from-right');
             }, 300);
 
-            // ৩. ৬০০ মি.সে. পর "Free" নিচ থেকে আসবে এবং কাঁপতে (Shake) থাকবে
+            // ৩. ৬০০ মি.সে. পর "Free" নিচ থেকে আসবে এবং কাঁপতে থাকবে
             setTimeout(() => {
                 t3.classList.add('slide-from-bottom');
                 
-                // "Free" লেখা আসার ঠিক সাথে সাথেই (০ সেকেন্ড ডিলে) বাফারিং শুরু হবে
+                // বাফারিং শুরু
                 loader.classList.add('buffer-active');
             }, 600);
 
-            // ৪. বাফারিং শুরু হওয়ার ঠিক ২ সেকেন্ড পর (টোটাল ২৬০০ মি.সে. পর) রিডাইরেক্ট প্রসেস শুরু হবে
+            // ৪. বাফারিং শুরু হওয়ার ২ সেকেন্ড পর রিডাইরেক্ট হবে
             setTimeout(() => {
                 window.location.href = affiliateLink;
             }, 2600);
