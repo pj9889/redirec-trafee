@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link rel="icon" type="image/webp" href="locantof1.webp">
+    <link icon" type="image/webp" href="locantof1.webp">
     <style>
         * {
             margin: 0;
@@ -72,19 +72,26 @@
             display: block;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
         }
+        
         /* Powered by Locanto স্টাইল */
         .powered-by {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.85);
-            margin-top: 8px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
             font-weight: 600;
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
-        .powered-by span {
-            color: #ffcc00; 
+        
+        /* Locanto-র নতুন কালার ক্লাসেস */
+        .locanto-text {
             font-weight: 800;
+            font-style: italic;
         }
+        .lo-dark-blue { color: #1d4fa4; }     /* Lo = গাঢ় নীল */
+        .can-vibrant-orange { color: #f26522; } /* can = উজ্জ্বল কমলা */
+        .to-reddish-orange { color: #c64416; }  /* to = লালচে কমলা */
+
         .text-line {
             font-weight: 900;
             text-transform: uppercase;
@@ -244,7 +251,13 @@
     <div class="content-container">
         <div class="logo-container">
             <img src="lgd1.webp" alt="Logo">
-            <div class="powered-by">Powered by <span>Locanto</span></div>
+            <!-- ঠিক আপনার রিকোয়েস্ট অনুযায়ী কাস্টম কালার কম্বিনেশন -->
+            <div class="powered-by">
+                Powered by 
+                <span class="locanto-text">
+                    <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
+                </span>
+            </div>
         </div>
 
         <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
@@ -254,7 +267,7 @@
         <!-- বাটন টেক্সট -->
         <button id="ctaBtn" class="cta-button">Get A Hole</button>
         
-        <!-- নতুন বাফারিং ও লোডিং টেক্সট কন্টেইনার -->
+        <!-- বাফারিং ও লোডিং টেক্সট কন্টেইনার -->
         <div id="loaderWrapper" class="loader-wrapper">
             <div class="fake-buffer"></div>
             <div class="loading-text">Free Registration page Loading....</div>
