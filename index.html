@@ -59,7 +59,7 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 25px 10px;
+            padding: 20px 10px;
         }
         
         .top-section {
@@ -67,12 +67,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 5px;
         }
 
         .logo-container {
             width: 100%;
             max-width: 450px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             padding: 0 15px;
         }
         .logo-container img {
@@ -101,16 +102,25 @@
         .can-vibrant-orange { color: #f26522; }
         .to-reddish-orange { color: #c64416; }
 
+        /* বাটনের ঠিক উপরের সেকশন (টেক্সটসমূহ) */
+        .bottom-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
         .text-line {
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             line-height: 1.1;
-            margin: 4px 0;
+            margin: 2px 0;
             opacity: 0;
         }
         .text-many-holes {
-            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
             color: #fff;
             text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
         }
@@ -118,7 +128,7 @@
             animation: slideLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         .text-waiting {
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
             color: #00ffff;
             text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
         }
@@ -126,10 +136,10 @@
             animation: slideRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         .text-free {
-            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
             color: #39ff14;
             text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14;
-            margin-bottom: 5px;
+            margin-bottom: 12px; /* বাটনের সাথে গ্যাপ */
         }
         .slide-from-bottom {
             animation: slideBottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
@@ -144,15 +154,14 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-bottom: 10px;
         }
 
         .cta-button {
             display: block;
             width: 100%;
             text-decoration: none;
-            padding: 14px 20px;
-            font-size: clamp(1.1rem, 3.8vw, 1.4rem);
+            padding: 13px 20px;
+            font-size: clamp(1.1rem, 3.8vw, 1.35rem);
             font-weight: 900;
             text-transform: uppercase;
             border-radius: 50px;
@@ -191,26 +200,23 @@
 
         /* ------------------ রিয়েল ক্লিক ইফেক্ট ক্লাসেস (বিপরীত কালার) ------------------ */
         .cta-button.btn-clicked {
-            animation: none !important; /* সাধারণ পালস বন্ধ করবে */
-            transform: scale(0.95) !important; /* প্রেসড ফিল দেবে */
+            animation: none !important;
+            transform: scale(0.95) !important;
             pointer-events: none;
         }
 
-        /* ওয়েবসাইট বাটন ক্লিক কালার (হলুদ থেকে উজ্জ্বল লালচে-বেগুনি) */
         .btn-website.btn-clicked {
             background: linear-gradient(90deg, #d50000 0%, #ff1744 100%) !important;
             color: #fff !important;
             box-shadow: 0 0 25px #ff1744 !important;
         }
 
-        /* টেলিগ্রাম বাটন ক্লিক কালার (নীল থেকে উজ্জ্বল কমলা) */
         .btn-telegram.btn-clicked {
             background: linear-gradient(90deg, #ff6d00 0%, #ff9100 100%) !important;
             color: #fff !important;
             box-shadow: 0 0 25px #ff9100 !important;
         }
 
-        /* হোয়াটসঅ্যাপ বাটন ক্লিক কালার (সবুজ থেকে উজ্জ্বল মেজেন্টা/পিঙ্ক) */
         .btn-whatsapp.btn-clicked {
             background: linear-gradient(90deg, #c51162 0%, #f50057 100%) !important;
             color: #fff !important;
@@ -267,7 +273,7 @@
     <div class="overlay"></div>
 
     <div class="content-container">
-        <!-- উপরের সেকশন: লোগো ও হেডিং টেক্সট -->
+        <!-- ১. উপরে শুধু লোগো সেকশন -->
         <div class="top-section">
             <div class="logo-container">
                 <img src="lgd1.webp" alt="Logo">
@@ -278,22 +284,26 @@
                     </span>
                 </div>
             </div>
+        </div>
 
+        <!-- ২. নিচে টেক্সট এবং তার ঠিক নিচে ৩টি বাটন -->
+        <div class="bottom-section">
+            <!-- হেডিং টেক্সটসমূহ (এখন বাটনের ঠিক উপরে) -->
             <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
             <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
             <div id="text3" class="text-line text-free">Free</div>
-        </div>
 
-        <!-- নিচের সেকশন: ৩টি বাটন -->
-        <div class="buttons-container">
-            <!-- ১. ওয়েবসাইট বাটন (এখানে ৫টি লিংক রোটেশন হবে) -->
-            <button id="websiteBtn" class="cta-button btn-website">Visit Website For Fuck</button>
-            
-            <!-- ২. টেলিগ্রাম বাটন -->
-            <a id="telegramBtn" href="YOUR_TELEGRAM_LINK_HERE" target="_blank" class="cta-button btn-telegram">Visit Telegram</a>
-            
-            <!-- ৩. হোয়াটসঅ্যাপ বাটন -->
-            <a id="whatsappBtn" href="YOUR_WHATSAPP_LINK_HERE" target="_blank" class="cta-button btn-whatsapp">Visit WhatsApp</a>
+            <!-- ৩টি বাটন -->
+            <div class="buttons-container">
+                <!-- ১. ওয়েবসাইট বাটন (এখানে ৫টি লিংক রোটেশন হবে) -->
+                <button id="websiteBtn" class="cta-button btn-website">Visit Website For Fuck</button>
+                
+                <!-- ২. টেলিগ্রাম বাটন -->
+                <a id="telegramBtn" href="YOUR_TELEGRAM_LINK_HERE" target="_blank" class="cta-button btn-telegram">Visit Telegram</a>
+                
+                <!-- ৩. হোয়াটসঅ্যাপ বাটন -->
+                <a id="whatsappBtn" href="YOUR_WHATSAPP_LINK_HERE" target="_blank" class="cta-button btn-whatsapp">Visit WhatsApp</a>
+            </div>
         </div>
     </div>
 
@@ -337,7 +347,7 @@
                 t3.classList.add('slide-from-bottom');
             }, 600);
 
-            // ১. ওয়েবসাইট বাটন ক্লিক হ্যান্ডলার (Rotate 5 Links + 1 second delay color change)
+            // ১. ওয়েবসাইট বাটন ক্লিক হ্যান্ডলার (Rotate 5 Links + 1 sec delay color change)
             webBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 webBtn.classList.add('btn-clicked');
@@ -353,7 +363,7 @@
                 }, 1000);
             });
 
-            // ২. টেলিগ্রাম বাটন ক্লিক হ্যান্ডলার (1 second delay color change)
+            // ২. টেলিগ্রাম বাটন ক্লিক হ্যান্ডলার (1 sec delay color change)
             tgBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 tgBtn.classList.add('btn-clicked');
@@ -364,7 +374,7 @@
                 }, 1000);
             });
 
-            // ৩. হোয়াটসঅ্যাপ বাটন ক্লিক হ্যান্ডলার (1 second delay color change)
+            // ৩. হোয়াটসঅ্যাপ বাটন ক্লিক হ্যান্ডলার (1 sec delay color change)
             waBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 waBtn.classList.add('btn-clicked');
