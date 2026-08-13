@@ -97,7 +97,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 50px 20px 20px 20px;
+            padding: 50px 20px 60px 20px;
         }
 
         /* লোগো ও পাওয়ারড বাই */
@@ -236,6 +236,27 @@
             display: flex !important;
         }
 
+        /* ফুটার স্টাইল */
+        .site-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            padding: 10px 15px;
+        }
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
         /* অ্যানিমেশনসমূহ */
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -302,6 +323,11 @@
             <div class="loading-text">Loading Free Registration Page...</div>
         </div>
     </div>
+
+    <!-- ফুটার কপিরাইট সেকশন -->
+    <footer class="site-footer">
+        <p class="footer-text">Copyright © 2006-2026 Locanto™</p>
+    </footer>
 
     <script>
         // অফার অ্যাফিলিয়েট লিংক
