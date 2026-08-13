@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Locanto Exclusive - Australia Dating</title>
     <link rel="icon" type="image/webp" href="locantof1.webp">
     <style>
@@ -10,14 +10,40 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none; /* টেক্সট সিলেক্ট বন্ধ */
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
         }
+
+        /* ব্যাকগ্রাউন্ড কালার ও বডি লক */
         body, html {
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow: hidden !important; /* কোনো স্ক্রোল হবে না */
+            position: fixed; /* টানাটানি সম্পূর্ণ বন্ধ */
+            top: 0;
+            left: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #050505;
+            background-color: #000;
             color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* পিসিতে মোবাইল ভিউ কন্টেইনার */
+        .app-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px; /* পিসিতে মোবাইলের ফ্রেম সাইজ */
+            height: 100vh;
+            max-height: 900px;
+            overflow: hidden;
+            background-color: #050505;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         /* ব্যাকগ্রাউন্ড স্লাইডার */
@@ -36,90 +62,82 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transform: scale(1);
-            transition: opacity 0.8s ease-in-out, transform 4s linear;
+            transition: opacity 0.6s ease-in-out;
+            will-change: opacity; /* ফাস্ট লোডিং প্রসেসিং */
         }
         .bg-slide.active {
             opacity: 1;
-            transform: scale(1.08);
         }
 
-        /* আধুনিক ওভারলে */
+        /* ওভারলে */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 90%);
+            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 90%);
             z-index: 2;
         }
 
-        /* টপ অস্ট্রেলিয়ান লাইভ ট্রাফিকের স্ট্রিপ */
+        /* টপ নোটিফিকেশন বার */
         .top-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            background: rgba(229, 9, 20, 0.9);
+            background: rgba(229, 9, 20, 0.95);
             color: #fff;
             text-align: center;
-            padding: 8px 12px;
-            font-size: 0.85rem;
+            padding: 8px 10px;
+            font-size: 0.8rem;
             font-weight: bold;
-            letter-spacing: 0.5px;
             z-index: 10;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .live-dot {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
             background-color: #00ff66;
             border-radius: 50%;
             display: inline-block;
             animation: pulseDot 1.2s infinite;
         }
 
-        /* কন্টেন্ট কন্টেইনার */
+        /* মূল কন্টেন্ট কন্টেইনার */
         .content-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: relative;
             z-index: 3;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 50px 20px 60px 20px;
+            padding: 10px 15px;
+            flex-grow: 1;
         }
 
-        /* লোগো ও পাওয়ারড বাই */
+        /* লোগো সেকশন */
         .logo-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 320px;
             margin-bottom: 15px;
         }
         .logo-container img {
-            width: 85%;
-            max-width: 380px;
+            width: 80%;
+            max-width: 280px;
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(0 4px 15px rgba(255, 255, 255, 0.3));
+            filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.2));
         }
         .powered-by {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.95);
-            margin-top: 8px;
+            margin-top: 5px;
             font-weight: 700;
-            letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.9);
         }
         .locanto-text {
@@ -130,46 +148,43 @@
         .can-vibrant-orange { color: #f26522; }
         .to-reddish-orange { color: #e63946; }
 
-        /* টেক্সট ডিজাইন */
+        /* টেক্সট বক্স */
         .headline-box {
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(8px);
-            padding: 15px 25px;
-            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(5px);
+            padding: 12px 15px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 20px;
-            max-width: 550px;
+            margin-bottom: 15px;
             width: 100%;
+            max-width: 380px;
         }
         .text-line {
             font-weight: 900;
             text-transform: uppercase;
-            line-height: 1.15;
-            letter-spacing: 1.5px;
+            line-height: 1.1;
+            letter-spacing: 1px;
         }
         .text-many-holes {
-            font-size: clamp(2rem, 6vw, 3.8rem);
+            font-size: 2.2rem;
             color: #ffffff;
-            text-shadow: 0 0 12px #ff0055, 0 0 25px #ff0055;
-            margin-bottom: 5px;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+            margin-bottom: 4px;
         }
         .text-waiting {
-            font-size: clamp(1.5rem, 4.5vw, 2.8rem);
+            font-size: 1.6rem;
             color: #00f0ff;
-            text-shadow: 0 0 10px #00f0ff;
-            margin-bottom: 8px;
+            text-shadow: 0 0 8px #00f0ff;
+            margin-bottom: 6px;
         }
         .text-free {
-            font-size: clamp(2.5rem, 8vw, 4.8rem);
+            font-size: 2.8rem;
             color: #39ff14;
-            text-shadow: 0 0 15px #39ff14, 0 0 35px #39ff14;
-            margin-top: 5px;
+            text-shadow: 0 0 12px #39ff14;
         }
 
-        /* সাব-লোকেশন নোটিশ (অস্ট্রেলিয়ান ট্রাফিকের জন্য) */
         .location-tag {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #ffeb3b;
             font-weight: 600;
             margin-bottom: 15px;
@@ -180,84 +195,74 @@
         .cta-button {
             display: inline-block;
             text-decoration: none;
-            padding: 16px 45px;
-            font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+            padding: 14px 35px;
+            font-size: 1.5rem;
             font-weight: 900;
             text-transform: uppercase;
             color: #000;
             background: linear-gradient(135deg, #ffe600 0%, #ffaa00 100%);
             border-radius: 50px;
-            box-shadow: 0 0 25px rgba(255, 204, 0, 0.8), inset 0 0 10px rgba(255,255,255,0.8);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
             cursor: pointer;
             border: none;
             position: relative;
             z-index: 10;
-            transition: all 0.2s ease;
             animation: pulseNudge 1.4s infinite ease-in-out;
+            width: 90%;
+            max-width: 320px;
         }
-        .cta-button:active {
-            transform: scale(0.96);
-        }
-
-        /* ক্লিক লোডিং ইফেক্ট */
         .cta-button.clicked {
             background: #e60000;
             color: #fff;
-            box-shadow: 0 0 30px #e60000;
+            box-shadow: 0 0 25px #e60000;
             animation: none;
             pointer-events: none;
         }
 
-        /* বাফারিং সার্ভিস */
+        /* লোডার */
         .loader-wrapper {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 15px;
+            margin-top: 10px;
         }
         .fake-buffer {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255,255,255,0.2);
-            border-top: 5px solid #ff0055;
+            width: 35px;
+            height: 35px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top: 4px solid #ff0055;
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
         }
         .loading-text {
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: bold;
-            margin-top: 12px;
-            letter-spacing: 0.5px;
+            margin-top: 8px;
         }
-
         .buffer-active {
             display: flex !important;
         }
 
-        /* ফুটার স্টাইল */
+        /* ফুটার স্টাইল (গ্যারান্টিড ভিজিবল) */
         .site-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            position: relative;
             width: 100%;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
             text-align: center;
-            padding: 10px 15px;
+            padding: 10px 5px;
         }
         .footer-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.85rem;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.8rem;
+            font-weight: 600;
             letter-spacing: 0.5px;
-            margin: 0;
         }
 
-        /* অ্যানিমেশনসমূহ */
+        /* অ্যানিমেশন */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -268,72 +273,78 @@
             100% { opacity: 0.3; transform: scale(0.9); }
         }
         @keyframes pulseNudge {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); }
-            50% { transform: scale(1.06); box-shadow: 0 0 35px rgba(255, 230, 0, 1); }
-            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 204, 0, 0.7); }
+            50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(255, 230, 0, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 204, 0, 0.7); }
         }
     </style>
 </head>
 <body>
 
-    <!-- লাইভ নোটিফিকেশন বার (Australia Specific) -->
-    <div class="top-bar">
-        <span class="live-dot"></span>
-        <span id="liveStatus">AUSTRALIA: 14 Escorts Active Near You Right Now</span>
-    </div>
+    <!-- পিসিতে মোবাইল লুক দেওয়ার কন্টেইনার -->
+    <div class="app-container">
+        
+        <!-- লাইভ নোটিফিকেশন বার -->
+        <div class="top-bar">
+            <span class="live-dot"></span>
+            <span id="liveStatus">AUSTRALIA: 14 Escorts Active Near You Right Now</span>
+        </div>
 
-    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার -->
-    <div class="bg-slider">
-        <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki3.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki4.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki5.webp');"></div>
-    </div>
+        <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার -->
+        <div class="bg-slider">
+            <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki3.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki4.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki5.webp');"></div>
+        </div>
 
-    <div class="overlay"></div>
+        <div class="overlay"></div>
 
-    <div class="content-container">
-        <!-- লোগো -->
-        <div class="logo-container">
-            <img src="lgd1.webp" alt="Locanto Logo">
-            <div class="powered-by">
-                Powered by 
-                <span class="locanto-text">
-                    <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
-                </span>
+        <!-- মূল কন্টেন্ট -->
+        <div class="content-container">
+            <!-- লোগো -->
+            <div class="logo-container">
+                <img src="lgd1.webp" alt="Locanto Logo">
+                <div class="powered-by">
+                    Powered by 
+                    <span class="locanto-text">
+                        <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- মেইন টেক্সট -->
+            <div class="headline-box">
+                <h1 class="text-line text-many-holes">MANY HOLES</h1>
+                <h2 class="text-line text-waiting">WAITING FOR YOU</h2>
+                <div class="text-line text-free">100% FREE</div>
+            </div>
+
+            <div class="location-tag">🔥 No Credit Card Required • Instant Match in Australia</div>
+
+            <!-- বাটন -->
+            <button id="ctaBtn" class="cta-button">GET A HOLE NOW</button>
+
+            <!-- লোডার -->
+            <div id="loaderWrapper" class="loader-wrapper">
+                <div class="fake-buffer"></div>
+                <div class="loading-text">Loading Free Registration Page...</div>
             </div>
         </div>
 
-        <!-- মেইন টেক্সট বক্স -->
-        <div class="headline-box">
-            <h1 class="text-line text-many-holes">MANY HOLES</h1>
-            <h2 class="text-line text-waiting">WAITING FOR YOU</h2>
-            <div class="text-line text-free">100% FREE</div>
-        </div>
+        <!-- ফুটার কপিরাইট সেকশন -->
+        <footer class="site-footer">
+            <p class="footer-text">Copyright © 2006-2026 Locanto™</p>
+        </footer>
 
-        <div class="location-tag">🔥 No Credit Card Required • Instant Match in Australia</div>
-
-        <!-- বাটন -->
-        <button id="ctaBtn" class="cta-button">GET A HOLE NOW</button>
-
-        <!-- লোডার -->
-        <div id="loaderWrapper" class="loader-wrapper">
-            <div class="fake-buffer"></div>
-            <div class="loading-text">Loading Free Registration Page...</div>
-        </div>
     </div>
 
-    <!-- ফুটার কপিরাইট সেকশন -->
-    <footer class="site-footer">
-        <p class="footer-text">Copyright © 2006-2026 Locanto™</p>
-    </footer>
-
     <script>
-        // অফার অ্যাফিলিয়েট লিংক
+        // অফার লিংক
         const affiliateLink = "https://c4tpbrw.balancedhonesty.org/wccm5xm?s1=bbbb&cid=bbbbb";
 
-        // ব্যাকগ্রাউন্ড অটো স্লাইডার
+        // ব্যাকগ্রাউন্ড অটো স্লাইডার (সুপার ফাস্ট ট্রানজিশন)
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
 
@@ -341,9 +352,9 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 2200);
+        }, 2000);
 
-        // অস্ট্রেলিয়ান লাইভ কাউন্টার চেঞ্জ (সাইকোলজিক্যাল বুস্ট)
+        // অস্ট্রেলিয়ান কাউন্টার
         const statusText = document.getElementById('liveStatus');
         const cities = ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide'];
         
@@ -351,7 +362,7 @@
             const randomCity = cities[Math.floor(Math.random() * cities.length)];
             const randomCount = Math.floor(Math.random() * 8) + 8;
             statusText.innerText = `${randomCity.toUpperCase()}: ${randomCount} Escorts Active Near You Right Now`;
-        }, 4000);
+        }, 3500);
 
         // বাটন ক্লিক ইভেন্ট
         const btn = document.getElementById('ctaBtn');
@@ -365,8 +376,13 @@
 
             setTimeout(() => {
                 window.location.href = affiliateLink;
-            }, 800);
+            }, 600);
         });
+
+        // মোবাইল ডাবল-ট্যাপ ও স্ক্রোল লক
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
