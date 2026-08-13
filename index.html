@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Locanto Exclusive - Australia Dating</title>
     <link rel="icon" type="image/webp" href="locantof1.webp">
     <style>
         * {
@@ -15,9 +15,12 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #050505;
+            color: #fff;
         }
+
+        /* ব্যাকগ্রাউন্ড স্লাইডার */
         .bg-slider {
             position: absolute;
             top: 0;
@@ -33,20 +36,55 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            transform: scale(1);
+            transition: opacity 0.8s ease-in-out, transform 4s linear;
         }
         .bg-slide.active {
             opacity: 1;
+            transform: scale(1.08);
         }
+
+        /* আধুনিক ওভারলে */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.45);
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 90%);
             z-index: 2;
         }
+
+        /* টপ অস্ট্রেলিয়ান লাইভ ট্রাফিকের স্ট্রিপ */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(229, 9, 20, 0.9);
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .live-dot {
+            width: 9px;
+            height: 9px;
+            background-color: #00ff66;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 1.2s infinite;
+        }
+
+        /* কন্টেন্ট কন্টেইনার */
         .content-container {
             position: absolute;
             top: 0;
@@ -56,212 +94,174 @@
             z-index: 3;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px 10px;
-        }
-        
-        .top-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 5px;
+            padding: 50px 20px 20px 20px;
         }
 
+        /* লোগো ও পাওয়ারড বাই */
         .logo-container {
             width: 100%;
-            max-width: 450px;
-            margin-bottom: 5px;
-            padding: 0 15px;
+            max-width: 480px;
+            margin-bottom: 15px;
         }
         .logo-container img {
-            width: 100%;
+            width: 85%;
+            max-width: 380px;
             height: auto;
             display: block;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 15px rgba(255, 255, 255, 0.3));
         }
-        
-        /* Powered by Locanto স্টাইল */
         .powered-by {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 5px;
-            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 8px;
+            font-weight: 700;
             letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
         }
-        
-        /* Locanto কালার ক্লাসেস */
         .locanto-text {
-            font-weight: 800;
+            font-weight: 900;
             font-style: italic;
         }
-        .lo-dark-blue { color: #1d4fa4; }
+        .lo-dark-blue { color: #2162d4; }
         .can-vibrant-orange { color: #f26522; }
-        .to-reddish-orange { color: #c64416; }
+        .to-reddish-orange { color: #e63946; }
 
-        /* বাটনের ঠিক উপরের সেকশন (টেক্সটসমূহ) */
-        .bottom-section {
+        /* টেক্সট ডিজাইন */
+        .headline-box {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(8px);
+            padding: 15px 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin-bottom: 20px;
+            max-width: 550px;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 10px;
         }
-
         .text-line {
             font-weight: 900;
             text-transform: uppercase;
+            line-height: 1.15;
             letter-spacing: 1.5px;
-            line-height: 1.1;
-            margin: 2px 0;
-            opacity: 0;
         }
         .text-many-holes {
-            font-size: clamp(2.2rem, 6vw, 3.8rem);
-            color: #fff;
-            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
-        }
-        .slide-from-left {
-            animation: slideLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            color: #ffffff;
+            text-shadow: 0 0 12px #ff0055, 0 0 25px #ff0055;
+            margin-bottom: 5px;
         }
         .text-waiting {
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-        }
-        .slide-from-right {
-            animation: slideRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            font-size: clamp(1.5rem, 4.5vw, 2.8rem);
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+            margin-bottom: 8px;
         }
         .text-free {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-size: clamp(2.5rem, 8vw, 4.8rem);
             color: #39ff14;
-            text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14;
-            margin-bottom: 12px; /* বাটনের সাথে গ্যাপ */
-        }
-        .slide-from-bottom {
-            animation: slideBottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
-                       megaShake 0.15s infinite alternate linear;
-            animation-delay: 0s, 0.4s;
+            text-shadow: 0 0 15px #39ff14, 0 0 35px #39ff14;
+            margin-top: 5px;
         }
 
-        /* ------------------ ৩টি বাটন কন্টেইনার ------------------ */
-        .buttons-container {
-            width: 100%;
-            max-width: 420px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        /* সাব-লোকেশন নোটিশ (অস্ট্রেলিয়ান ট্রাফিকের জন্য) */
+        .location-tag {
+            font-size: 0.95rem;
+            color: #ffeb3b;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-shadow: 0 1px 3px #000;
         }
 
+        /* বাটন স্টাইল */
         .cta-button {
-            display: block;
-            width: 100%;
+            display: inline-block;
             text-decoration: none;
-            padding: 13px 20px;
-            font-size: clamp(1.1rem, 3.8vw, 1.35rem);
+            padding: 16px 45px;
+            font-size: clamp(1.4rem, 4.5vw, 2.2rem);
             font-weight: 900;
             text-transform: uppercase;
+            color: #000;
+            background: linear-gradient(135deg, #ffe600 0%, #ffaa00 100%);
             border-radius: 50px;
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.8), inset 0 0 10px rgba(255,255,255,0.8);
             cursor: pointer;
             border: none;
-            outline: none;
             position: relative;
             z-index: 10;
-            text-align: center;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease;
+            animation: pulseNudge 1.4s infinite ease-in-out;
+        }
+        .cta-button:active {
+            transform: scale(0.96);
         }
 
-        /* ১. Website Button - Yellow Glow */
-        .btn-website {
-            color: #000;
-            background: linear-gradient(90deg, #ffea00 0%, #ffcc00 100%);
-            box-shadow: 0 0 15px #ffcc00, inset 0 0 8px rgba(255,255,255,0.6);
-            animation: pulseNudge 1.5s infinite ease-in-out;
-        }
-
-        /* ২. Telegram Button - Sky Blue Glow */
-        .btn-telegram {
+        /* ক্লিক লোডিং ইফেক্ট */
+        .cta-button.clicked {
+            background: #e60000;
             color: #fff;
-            background: linear-gradient(90deg, #0088cc 0%, #00bcff 100%);
-            box-shadow: 0 0 15px #00bcff, inset 0 0 8px rgba(255,255,255,0.4);
-            animation: pulseTelegram 1.5s infinite ease-in-out;
-        }
-
-        /* ৩. WhatsApp Button - Vibrant Green Glow */
-        .btn-whatsapp {
-            color: #fff;
-            background: linear-gradient(90deg, #25d366 0%, #075e54 100%);
-            box-shadow: 0 0 15px #25d366, inset 0 0 8px rgba(255,255,255,0.4);
-            animation: pulseWhatsApp 1.5s infinite ease-in-out;
-        }
-
-        /* ------------------ রিয়েল ক্লিক ইফেক্ট ক্লাসেস (বিপরীত কালার) ------------------ */
-        .cta-button.btn-clicked {
-            animation: none !important;
-            transform: scale(0.95) !important;
+            box-shadow: 0 0 30px #e60000;
+            animation: none;
             pointer-events: none;
         }
 
-        .btn-website.btn-clicked {
-            background: linear-gradient(90deg, #d50000 0%, #ff1744 100%) !important;
-            color: #fff !important;
-            box-shadow: 0 0 25px #ff1744 !important;
+        /* বাফারিং সার্ভিস */
+        .loader-wrapper {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .fake-buffer {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ff0055;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        .loading-text {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
         }
 
-        .btn-telegram.btn-clicked {
-            background: linear-gradient(90deg, #ff6d00 0%, #ff9100 100%) !important;
-            color: #fff !important;
-            box-shadow: 0 0 25px #ff9100 !important;
-        }
-
-        .btn-whatsapp.btn-clicked {
-            background: linear-gradient(90deg, #c51162 0%, #f50057 100%) !important;
-            color: #fff !important;
-            box-shadow: 0 0 25px #f50057 !important;
+        .buffer-active {
+            display: flex !important;
         }
 
         /* অ্যানিমেশনসমূহ */
-        @keyframes slideLeft {
-            0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
-            100% { transform: translateX(0) skewX(0deg); opacity: 1; }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        @keyframes slideRight {
-            0% { transform: translateX(150%) skewX(20deg); opacity: 0; }
-            100% { transform: translateX(0) skewX(0deg); opacity: 1; }
+        @keyframes pulseDot {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.3; transform: scale(0.9); }
         }
-        @keyframes slideBottom {
-            0% { transform: translateY(150%) scale(0.5); opacity: 0; }
-            100% { transform: translateY(0) scale(1); opacity: 1; }
-        }
-        @keyframes megaShake {
-            0% { transform: translate(2px, 1px) rotate(0deg) scale(1); }
-            20% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.03); }
-            40% { transform: translate(-2px, 0px) rotate(1deg) scale(1); }
-            60% { transform: translate(0px, 2px) rotate(0deg) scale(1.03); }
-            80% { transform: translate(1px, -1px) rotate(-1deg) scale(1); }
-            100% { transform: translate(-1px, 2px) rotate(1deg) scale(1.05); }
-        }
-        
-        /* বাটন পালস অ্যানিমেশনসমূহ */
         @keyframes pulseNudge {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px #ffcc00; }
-            50% { transform: scale(1.03); box-shadow: 0 0 25px #ffea00; }
-        }
-        @keyframes pulseTelegram {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px #00bcff; }
-            50% { transform: scale(1.03); box-shadow: 0 0 25px #0088cc; }
-        }
-        @keyframes pulseWhatsApp {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px #25d366; }
-            50% { transform: scale(1.03); box-shadow: 0 0 25px #34ea78; }
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); }
+            50% { transform: scale(1.06); box-shadow: 0 0 35px rgba(255, 230, 0, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); }
         }
     </style>
 </head>
 <body>
 
+    <!-- লাইভ নোটিফিকেশন বার (Australia Specific) -->
+    <div class="top-bar">
+        <span class="live-dot"></span>
+        <span id="liveStatus">AUSTRALIA: 14 Escorts Active Near You Right Now</span>
+    </div>
+
+    <!-- ব্যাকগ্রাউন্ড ইমেজ স্লাইডার -->
     <div class="bg-slider">
         <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
         <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
@@ -273,51 +273,41 @@
     <div class="overlay"></div>
 
     <div class="content-container">
-        <!-- ১. উপরে শুধু লোগো সেকশন -->
-        <div class="top-section">
-            <div class="logo-container">
-                <img src="lgd1.webp" alt="Logo">
-                <div class="powered-by">
-                    Powered by 
-                    <span class="locanto-text">
-                        <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
-                    </span>
-                </div>
+        <!-- লোগো -->
+        <div class="logo-container">
+            <img src="lgd1.webp" alt="Locanto Logo">
+            <div class="powered-by">
+                Powered by 
+                <span class="locanto-text">
+                    <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
+                </span>
             </div>
         </div>
 
-        <!-- ২. নিচে টেক্সট এবং তার ঠিক নিচে ৩টি বাটন -->
-        <div class="bottom-section">
-            <!-- হেডিং টেক্সটসমূহ (এখন বাটনের ঠিক উপরে) -->
-            <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
-            <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
-            <div id="text3" class="text-line text-free">Free</div>
+        <!-- মেইন টেক্সট বক্স -->
+        <div class="headline-box">
+            <h1 class="text-line text-many-holes">MANY HOLES</h1>
+            <h2 class="text-line text-waiting">WAITING FOR YOU</h2>
+            <div class="text-line text-free">100% FREE</div>
+        </div>
 
-            <!-- ৩টি বাটন -->
-            <div class="buttons-container">
-                <!-- ১. ওয়েবসাইট বাটন (এখানে ৫টি লিংক রোটেশন হবে) -->
-                <button id="websiteBtn" class="cta-button btn-website">Visit Website For Fuck</button>
-                
-                <!-- ২. টেলিগ্রাম বাটন -->
-                <a id="telegramBtn" href="https://t.me/Ninakw247" target="_blank" class="cta-button btn-telegram">Visit Telegram</a>
-                
-                <!-- ৩. হোয়াটসঅ্যাপ বাটন -->
-                <a id="whatsappBtn" href="https://whatsapp.com/channel/0029VbDQky7LikgCKpSj7t2i" target="_blank" class="cta-button btn-whatsapp">Visit WhatsApp</a>
-            </div>
+        <div class="location-tag">🔥 No Credit Card Required • Instant Match in Australia</div>
+
+        <!-- বাটন -->
+        <button id="ctaBtn" class="cta-button">GET A HOLE NOW</button>
+
+        <!-- লোডার -->
+        <div id="loaderWrapper" class="loader-wrapper">
+            <div class="fake-buffer"></div>
+            <div class="loading-text">Loading Free Registration Page...</div>
         </div>
     </div>
 
     <script>
-        // ৫টি অ্যাফিলিয়েট লিংকের অ্যারে
-        const affiliateLinks = [
-            "https://paysale.g2afse.com/click?pid=125904&offer_id=10417",
-            "https://paysale.g2afse.com/click?pid=125904&offer_id=10401",
-            "https://paysale.g2afse.com/click?pid=125904&offer_id=10199",
-            "https://paysale.g2afse.com/click?pid=125904&offer_id=7684",
-            "https://paysale.g2afse.com/click?pid=125904&offer_id=12982"
-        ];
+        // অফার অ্যাফিলিয়েট লিংক
+        const affiliateLink = "https://c4tpbrw.balancedhonesty.org/wccm5xm?s1=bbbb&cid=bbbbb";
 
-        // ব্যাকগ্রাউন্ড স্লাইডার
+        // ব্যাকগ্রাউন্ড অটো স্লাইডার
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
 
@@ -325,65 +315,31 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 1000);
+        }, 2200);
 
-        // পেজ লোড ও অ্যানিমেশন হ্যান্ডলিং
-        window.addEventListener('load', () => {
-            const t1 = document.getElementById('text1');
-            const t2 = document.getElementById('text2');
-            const t3 = document.getElementById('text3');
-            
-            const webBtn = document.getElementById('websiteBtn');
-            const tgBtn = document.getElementById('telegramBtn');
-            const waBtn = document.getElementById('whatsappBtn');
+        // অস্ট্রেলিয়ান লাইভ কাউন্টার চেঞ্জ (সাইকোলজিক্যাল বুস্ট)
+        const statusText = document.getElementById('liveStatus');
+        const cities = ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide'];
+        
+        setInterval(() => {
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            const randomCount = Math.floor(Math.random() * 8) + 8;
+            statusText.innerText = `${randomCity.toUpperCase()}: ${randomCount} Escorts Active Near You Right Now`;
+        }, 4000);
 
-            t1.classList.add('slide-from-left');
+        // বাটন ক্লিক ইভেন্ট
+        const btn = document.getElementById('ctaBtn');
+        const loaderWrapper = document.getElementById('loaderWrapper');
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            btn.classList.add('clicked');
+            btn.innerText = "CONNECTING...";
+            loaderWrapper.classList.add('buffer-active');
 
             setTimeout(() => {
-                t2.classList.add('slide-from-right');
-            }, 300);
-
-            setTimeout(() => {
-                t3.classList.add('slide-from-bottom');
-            }, 600);
-
-            // ১. ওয়েবসাইট বাটন ক্লিক হ্যান্ডলার (Rotate 5 Links + 1 sec delay color change)
-            webBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                webBtn.classList.add('btn-clicked');
-
-                let currentIndex = parseInt(localStorage.getItem('currentOfferIndex')) || 0;
-                const targetLink = affiliateLinks[currentIndex];
-
-                let nextIndex = (currentIndex + 1) % affiliateLinks.length;
-                localStorage.setItem('currentOfferIndex', nextIndex);
-
-                setTimeout(() => {
-                    window.location.href = targetLink;
-                }, 1000);
-            });
-
-            // ২. টেলিগ্রাম বাটন ক্লিক হ্যান্ডলার (1 sec delay color change)
-            tgBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                tgBtn.classList.add('btn-clicked');
-                const targetLink = tgBtn.getAttribute('href');
-
-                setTimeout(() => {
-                    window.open(targetLink, '_blank');
-                }, 1000);
-            });
-
-            // ৩. হোয়াটসঅ্যাপ বাটন ক্লিক হ্যান্ডলার (1 sec delay color change)
-            waBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                waBtn.classList.add('btn-clicked');
-                const targetLink = waBtn.getAttribute('href');
-
-                setTimeout(() => {
-                    window.open(targetLink, '_blank');
-                }, 1000);
-            });
+                window.location.href = affiliateLink;
+            }, 800);
         });
     </script>
 </body>
